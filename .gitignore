@@ -3,3 +3,4 @@ __pycache__/
 service_account.json
 temp_test_creds.json
 *.pyc
+.streamlit/secrets.toml
