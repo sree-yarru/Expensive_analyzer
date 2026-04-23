@@ -1,0 +1,5 @@
+__pycache__/
+.env
+service_account.json
+temp_test_creds.json
+*.pyc

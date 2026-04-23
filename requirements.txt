@@ -1,0 +1,13 @@
+streamlit
+pandas
+pillow
+langextract
+google-genai
+pydantic
+gspread
+PyMuPDF
+python-dotenv
+imap-tools
+google-api-python-client
+google-auth
+functions-framework

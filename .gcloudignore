@@ -1,0 +1,15 @@
+# Ignore unnecessary scripts and web app configs
+app.py
+email_alectra_agent.py
+email_history_agent.py
+email_order_agent.py
+email_peel_agent.py
+telegram_agent.py
+test_dummy.py
+test_lx.py
+extraction_config*.json
+temp_test*.json
+
+# Ignore folders
+.streamlit/
+__pycache__/

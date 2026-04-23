@@ -1,0 +1,36 @@
+{
+    "prompt": "Extract the receipt details. Include the shop name, shop address, date (FORMAT STRICTLY AS YYYY-MM-DD), time, any discounts applied, all the items purchased (with their individual quantity, unit_price, and total_price as attributes), and the grand total_amount.",
+    
+    "fields": {
+        "shop":         { "label": "Shop:",        "summary": true },
+        "address":      { "label": "Address:",     "summary": true },
+        "date":         { "label": "Date:",        "summary": true },
+        "time":         { "label": "Time:",        "summary": true },
+        "discount":     { "label": "Discount:",    "summary": false },
+        "total_amount": { "label": "Grand Total:", "summary": true }
+    },
+
+    "item_field": {
+        "name": "item",
+        "attributes": ["quantity", "unit_price", "total_price"],
+        "columns": ["Item Name", "Quantity", "Unit Price", "Total Price"]
+    },
+
+    "summary_columns": ["Date", "Time", "Shop", "Place (Address)", "Total Cost"],
+    "summary_field_order": ["date", "time", "shop", "address", "total_amount"],
+
+    "example": {
+        "text": "SuperMart Store #12\n123 Main St, Springfield\nTel: 555-0192\nDate: 2023-11-04 14:32\n\n1x Apple            $1.50\n2 Bananas          $2.00\n3  Milk 1gal        $4.50\n\nDiscount: $0.50\nTax: $0.80\nTotal: $8.80",
+        "extractions": [
+            { "class": "shop",         "text": "SuperMart Store #12" },
+            { "class": "address",      "text": "123 Main St, Springfield" },
+            { "class": "date",         "text": "2023-11-04" },
+            { "class": "time",         "text": "14:32" },
+            { "class": "item",         "text": "Apple",     "attributes": { "quantity": "1", "unit_price": "1.50", "total_price": "1.50" } },
+            { "class": "item",         "text": "Bananas",   "attributes": { "quantity": "2", "unit_price": "1.00", "total_price": "2.00" } },
+            { "class": "item",         "text": "Milk 1gal", "attributes": { "quantity": "3", "unit_price": "1.50", "total_price": "4.50" } },
+            { "class": "discount",     "text": "0.50" },
+            { "class": "total_amount", "text": "8.80" }
+        ]
+    }
+}

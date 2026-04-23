@@ -1,0 +1,53 @@
+{
+    "prompt": "Extract order/purchase details from this email. Include the order_number (confirmation number or transaction ID), vendor (store or seller name), order_date (FORMAT STRICTLY AS YYYY-MM-DD), all items purchased (with their description, quantity, unit_price, and total_price as attributes), shipping cost if present, tax if present, and the grand total_amount. If multiple orders exist in one email, extract all of them.",
+
+    "fields": {
+        "order_number": { "label": "Order #:", "summary": true },
+        "vendor":       { "label": "Vendor:",  "summary": true },
+        "order_date":   { "label": "Date:",    "summary": true },
+        "shipping":     { "label": "Shipping:", "summary": false },
+        "tax":          { "label": "Tax:",      "summary": false },
+        "total_amount": { "label": "Total:",    "summary": true }
+    },
+
+    "item_field": {
+        "name": "item",
+        "attributes": ["description", "quantity", "unit_price", "total_price"],
+        "columns": ["Item Name", "Description", "Qty", "Unit Price", "Total Price"]
+    },
+
+    "summary_columns": ["Order #", "Vendor", "Date", "Total", "# Items"],
+    "summary_field_order": ["order_number", "vendor", "order_date", "total_amount"],
+
+    "example": {
+        "text": "Order Confirmation\nOrder #: 112-9876543-2345678\nAmazon.com\nOrder Date: January 15, 2026\n\nItems Ordered:\n1x Logitech MX Master 3S Mouse - Graphite    $89.99\n2x USB-C Cable 6ft                            $15.98\n\nShipping: $5.99\nTax: $8.40\nOrder Total: $120.36",
+        "extractions": [
+            { "class": "order_number", "text": "112-9876543-2345678" },
+            { "class": "vendor",       "text": "Amazon.com" },
+            { "class": "order_date",   "text": "2026-01-15" },
+            {
+                "class": "item",
+                "text": "Logitech MX Master 3S Mouse",
+                "attributes": {
+                    "description": "Graphite wireless ergonomic mouse",
+                    "quantity": "1",
+                    "unit_price": "89.99",
+                    "total_price": "89.99"
+                }
+            },
+            {
+                "class": "item",
+                "text": "USB-C Cable 6ft",
+                "attributes": {
+                    "description": "6 foot USB Type-C charging cable",
+                    "quantity": "2",
+                    "unit_price": "7.99",
+                    "total_price": "15.98"
+                }
+            },
+            { "class": "shipping",     "text": "5.99" },
+            { "class": "tax",          "text": "8.40" },
+            { "class": "total_amount", "text": "120.36" }
+        ]
+    }
+}

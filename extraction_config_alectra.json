@@ -1,0 +1,45 @@
+{
+    "prompt": "Extract utility bill summary details from this Alectra Utilities email or bill. Include the bill_number (invoice or bill number), account_number, billing_period (e.g. Jan 15 - Feb 14, 2026), bill_date (date the bill was generated/issued, FORMAT STRICTLY AS YYYY-MM-DD), due_date (payment due date, FORMAT STRICTLY AS YYYY-MM-DD), amount_due (total amount owing), previous_balance, payments_received, new_charges, electricity_charges, delivery_charges, regulatory_charges, debt_retirement_charge, and any late_payment_charge if present. If a total consumption in kWh is shown, extract it as total_kwh. Do NOT extract individual line-item details.",
+
+    "fields": {
+        "bill_number":          { "label": "Bill #:",              "summary": true },
+        "account_number":       { "label": "Account #:",           "summary": true },
+        "billing_period":       { "label": "Billing Period:",      "summary": true },
+        "bill_date":            { "label": "Bill Date:",           "summary": true },
+        "due_date":             { "label": "Due Date:",            "summary": true },
+        "amount_due":           { "label": "Amount Due ($):",      "summary": true },
+        "previous_balance":     { "label": "Previous Balance ($):", "summary": false },
+        "payments_received":    { "label": "Payments Received ($):", "summary": false },
+        "new_charges":          { "label": "New Charges ($):",     "summary": false },
+        "electricity_charges":  { "label": "Electricity ($):",     "summary": false },
+        "delivery_charges":     { "label": "Delivery ($):",        "summary": false },
+        "regulatory_charges":   { "label": "Regulatory ($):",      "summary": false },
+        "debt_retirement_charge": { "label": "Debt Retirement ($):", "summary": false },
+        "late_payment_charge":  { "label": "Late Payment ($):",    "summary": false },
+        "total_kwh":            { "label": "Total kWh:",           "summary": true }
+    },
+
+    "summary_columns": ["Bill #", "Account #", "Billing Period", "Bill Date", "Due Date", "Amount Due ($)", "Total kWh"],
+    "summary_field_order": ["bill_number", "account_number", "billing_period", "bill_date", "due_date", "amount_due", "total_kwh"],
+
+    "example": {
+        "text": "Alectra Utilities Corporation\nBill Statement\n\nAccount Number: 1234 5678 90\nBill Number: 9876543210\nBill Date: February 15, 2026\nBilling Period: January 15, 2026 to February 14, 2026\nDue Date: March 7, 2026\n\nPrevious Balance: $145.32\nPayment Received - Thank you: -$145.32\n\nNew Charges:\n  Electricity Charges:     $42.18\n  Delivery Charges:        $38.72\n  Regulatory Charges:      $6.54\n  Debt Retirement Charge:  $3.95\n\nTotal New Charges:  $91.39\n\nTotal Amount Due: $91.39\n\nTotal Consumption: 650 kWh",
+        "extractions": [
+            { "class": "bill_number",      "text": "9876543210" },
+            { "class": "account_number",   "text": "1234 5678 90" },
+            { "class": "billing_period",   "text": "January 15, 2026 to February 14, 2026" },
+            { "class": "bill_date",        "text": "2026-02-15" },
+            { "class": "due_date",         "text": "2026-03-07" },
+            { "class": "amount_due",       "text": "91.39" },
+            { "class": "previous_balance", "text": "145.32" },
+            { "class": "payments_received","text": "145.32" },
+            { "class": "new_charges",      "text": "91.39" },
+            { "class": "electricity_charges", "text": "42.18" },
+            { "class": "delivery_charges",    "text": "38.72" },
+            { "class": "regulatory_charges",  "text": "6.54" },
+            { "class": "debt_retirement_charge", "text": "3.95" },
+            { "class": "late_payment_charge",    "text": "" },
+            { "class": "total_kwh",         "text": "650" }
+        ]
+    }
+}

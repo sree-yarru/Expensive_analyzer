@@ -1,0 +1,43 @@
+{
+    "prompt": "Extract water/utility bill summary details from this Region of Peel (Peel Region) water bill email or statement. Include the bill_number (invoice or bill number), account_number, billing_period (e.g. Jan 1 - Feb 28, 2026), bill_date (date the bill was generated/issued, FORMAT STRICTLY AS YYYY-MM-DD), due_date (payment due date, FORMAT STRICTLY AS YYYY-MM-DD), amount_due (total amount owing), previous_balance, payments_received, new_charges, water_charges, wastewater_charges, stormwater_charges, and any late_payment_charge if present. If a total water consumption in cubic metres (m³) or litres is shown, extract it as total_consumption. Do NOT extract individual line-item details.",
+
+    "fields": {
+        "bill_number":          { "label": "Bill #:",              "summary": true },
+        "account_number":       { "label": "Account #:",           "summary": true },
+        "billing_period":       { "label": "Billing Period:",      "summary": true },
+        "bill_date":            { "label": "Bill Date:",           "summary": true },
+        "due_date":             { "label": "Due Date:",            "summary": true },
+        "amount_due":           { "label": "Amount Due ($):",      "summary": true },
+        "previous_balance":     { "label": "Previous Balance ($):", "summary": false },
+        "payments_received":    { "label": "Payments Received ($):", "summary": false },
+        "new_charges":          { "label": "New Charges ($):",     "summary": false },
+        "water_charges":        { "label": "Water ($):",           "summary": false },
+        "wastewater_charges":   { "label": "Wastewater ($):",      "summary": false },
+        "stormwater_charges":   { "label": "Stormwater ($):",      "summary": false },
+        "late_payment_charge":  { "label": "Late Payment ($):",    "summary": false },
+        "total_consumption":    { "label": "Total Consumption:",   "summary": true }
+    },
+
+    "summary_columns": ["Bill #", "Account #", "Billing Period", "Bill Date", "Due Date", "Amount Due ($)", "Total Consumption"],
+    "summary_field_order": ["bill_number", "account_number", "billing_period", "bill_date", "due_date", "amount_due", "total_consumption"],
+
+    "example": {
+        "text": "Region of Peel\nWater Bill Statement\n\nAccount Number: 1183613878\nBill Number: WB-20260301\nBill Date: March 1, 2026\nBilling Period: January 1, 2026 to February 28, 2026\nDue Date: April 6, 2026\n\nPrevious Balance: $275.50\nPayment Received - Thank you: -$275.50\n\nNew Charges:\n  Water Supply Charges:      $125.40\n  Wastewater Charges:        $98.72\n  Stormwater Charges:        $59.62\n\nTotal New Charges:  $283.74\n\nTotal Amount Due: $283.74\n\nTotal Consumption: 42 m³",
+        "extractions": [
+            { "class": "bill_number",      "text": "WB-20260301" },
+            { "class": "account_number",   "text": "1183613878" },
+            { "class": "billing_period",   "text": "January 1, 2026 to February 28, 2026" },
+            { "class": "bill_date",        "text": "2026-03-01" },
+            { "class": "due_date",         "text": "2026-04-06" },
+            { "class": "amount_due",       "text": "283.74" },
+            { "class": "previous_balance", "text": "275.50" },
+            { "class": "payments_received","text": "275.50" },
+            { "class": "new_charges",      "text": "283.74" },
+            { "class": "water_charges",       "text": "125.40" },
+            { "class": "wastewater_charges",  "text": "98.72" },
+            { "class": "stormwater_charges",  "text": "59.62" },
+            { "class": "late_payment_charge", "text": "" },
+            { "class": "total_consumption",   "text": "42" }
+        ]
+    }
+}
